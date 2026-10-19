@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Item</title>
+    <link rel="stylesheet" href="/static/styleee.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="add-page">
+
+    <nav class="navbar-senai">
+        <div class="logo-container">
+            <img src="/static/senainovo.jpg" alt="Logo SENAI">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/adm">Início</a></li>
+            <li><a href="/almoxarifado">Almoxarifado</a></li>
+            <li><a href="/add">Adicionar item</a></li>
+            <li><a href="/retirada">Retirada</a></li>
+            <li><a href="/adicio" class="btn-adm">Cadastrar Usuário</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h2>Adicionar Item ao Estoque</h2>
+
+            <form id="formAddItem">
+                <div class="form-group">
+                    <label for="nome">Nome do Item:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Multímetro Digital" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" name="quantidade" min="1" placeholder="Ex: 10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="Ferramentas">Ferramentas</option>
+                        <option value="Eletroeletrônica">Eletroeletrônica</option>
+                        <option value="Mecânica">Mecânica</option>
+                    </select>
+                </div>
+
+                <!-- CAMPO ADICIONADO PARA A URL DA IMAGEM -->
+                <div class="form-group">
+                    <label for="imagem_url">URL da Imagem (Link):</label>
+                    <input type="url" id="imagem_url" name="imagem_url" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+
+                <button type="submit" class="btn-submit">Adicionar Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formAddItem').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const res = await fetch('/adicionar_item', { method: 'POST', body: new FormData(this) });
+            const data = await res.json();
+
+            if (res.ok) {
+                Swal.fire({ title: 'Sucesso!', text: data.mensagem, icon: 'success', confirmButtonColor: '#ff6600' });
+                this.reset();
+            } else {
+                Swal.fire({ title: 'Erro!', text: data.mensagem, icon: 'error', confirmButtonColor: '#d33' });
+            }
+        });
+    </script>
+</body>
+</html>

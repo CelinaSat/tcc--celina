@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.add-page {
+    background: url('/static/trabalho.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Overlay suave sobre o fundo */
+body.add-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 43, 102, 0.25);
+    z-index: 1;
+}
+
+/* Navbar SENAI */
+.navbar-senai {
+    position: relative;
+    z-index: 2;
+    background-color: #0f2b66;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-senai .logo-container img {
+    height: 38px;
+    width: auto;
+}
+
+.navbar-senai .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.navbar-senai .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navbar-senai .nav-links a:hover {
+    color: #ff6600;
+}
+
+/* Container do Form */
+.form-container {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.form-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.form-card h2 {
+    color: #0f2b66;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* Campos do Form */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #0f2b66;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #0f2b66;
+}
+
+/* Customização do Input File */
+.form-group input[type="file"] {
+    background-color: #ffffff;
+    color: #555555;
+    cursor: pointer;
+}
+
+/* Botão Adicionar Laranja */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6600;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #e05500;
+}

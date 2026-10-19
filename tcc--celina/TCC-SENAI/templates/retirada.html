@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirada de Item</title>
+    <link rel="stylesheet" href="/static/styleee.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="retirada-page">
+
+    <nav class="navbar-senai">
+        <div class="logo-container">
+            <img src="/static/senainovo.jpg" alt="Logo SENAI">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/adm">Início</a></li>
+            <li><a href="/almoxarifado">Almoxarifado</a></li>
+            <li><a href="/add">Adicionar item</a></li>
+            <li><a href="/retirada">Retirada</a></li>
+            <li><a href="/adicio" class="btn-adm">Cadastrar Usuário</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h2>Registrar Retirada</h2>
+
+            <form id="formRetirada">
+                <div class="form-group">
+                    <label for="produto_id">Selecione o Item:</label>
+                    <select id="produto_id" name="produto_id" required>
+                        {% for item in produtos %}
+                            <option value="{{ item.id }}">{{ item.nome }} (Estoque: {{ item.quantidade }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidade">Quantidade a Retirar:</label>
+                    <input type="number" id="quantidade" name="quantidade" min="1" placeholder="Ex: 2" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmar Retirada</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formRetirada').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const res = await fetch('/retirar_item', { method: 'POST', body: new FormData(this) });
+            const data = await res.json();
+
+            if (res.ok) {
+                Swal.fire({ 
+                    title: 'Retirado!', 
+                    text: data.mensagem, 
+                    icon: 'success', 
+                    confirmButtonColor: '#ff6600' 
+                }).then(() => {
+                    location.reload(); // Recarrega para atualizar a quantidade disponível na lista
+                });
+            } else {
+                Swal.fire({ title: 'Atenção!', text: data.mensagem, icon: 'warning', confirmButtonColor: '#d33' });
+            }
+        });
+    </script>
+</body>
+</html>

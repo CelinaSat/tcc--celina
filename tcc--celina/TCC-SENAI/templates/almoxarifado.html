@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="/static/almo.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="almo-page">
+    <!-- Navbar SENAI -->
+    <nav class="navbar-senai">
+        <div class="logo-container">
+            <img src="/static/senainovo.jpg" alt="Logo SENAI">
+        </div>
+        <ul class="nav-links">
+            <!-- Corrigido para /adm para evitar o erro 405 Method Not Allowed -->
+            <li><a href="/adm">Início</a></li>
+            <li><a href="/almoxarifado">Almoxarifado</a></li>
+            <li><a href="/add">Adicionar item</a></li>
+            <li><a href="/retirada">Retirada</a></li>
+        </ul>
+    </nav>
+
+    <!-- Tabela do Estoque -->
+    <div class="table-container">
+        <div class="table-card">
+            <h2>Itens em Estoque</h2>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Imagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if produtos %}
+                        {% for item in produtos %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td><strong>{{ item.nome }}</strong></td>
+                            <td>{{ item.categoria }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>
+                                {% if item.imagem_url %}
+                                    <button class="btn-view-img" onclick="mostrarImagem('{{ item.nome }}', '{{ item.imagem_url }}')">
+                                        Ver Imagem
+                                    </button>
+                                {% else %}
+                                    <span style="color: #999;">Sem imagem</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="no-data">Nenhum produto cadastrado no momento.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para acionar o Modal de Imagem via SweetAlert2 -->
+    <script>
+        function mostrarImagem(nome, url) {
+            Swal.fire({
+                title: nome,
+                imageUrl: url,
+                imageAlt: nome,
+                imageHeight: 300,
+                confirmButtonColor: '#ff6600',
+                confirmButtonText: 'Fechar'
+            });
+        }
+    </script>
+</body>
+</html>

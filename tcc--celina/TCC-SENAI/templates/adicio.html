@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="/static/styleee.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="adicio-page">
+
+    <nav class="navbar-senai">
+        <div class="logo-container">
+            <img src="/static/senainovo.jpg" alt="Logo SENAI">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/adm">Início</a></li>
+            <li><a href="/almoxarifado">Almoxarifado</a></li>
+            <li><a href="/add">Adicionar item</a></li>
+            <li><a href="/retirada">Retirada</a></li>
+            <li><a href="/adicio" class="btn-adm">Cadastrar Usuário</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h2>Cadastrar Novo Usuário</h2>
+
+            <form id="formUsuario">
+                <div class="form-group">
+                    <label for="usuario">Nome de Usuário / E-mail:</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Ex: operador01" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a senha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="permissao">Nível de Permissão:</label>
+                    <select id="permissao" name="permissao" required>
+                        <option value="user">Usuário Comum</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Cadastrar Usuário</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formUsuario').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const res = await fetch('/cadastrar_usuario', { method: 'POST', body: new FormData(this) });
+            const data = await res.json();
+
+            if (res.ok) {
+                Swal.fire({ title: 'Sucesso!', text: data.mensagem, icon: 'success', confirmButtonColor: '#ff6600' });
+                this.reset();
+            } else {
+                Swal.fire({ title: 'Erro!', text: data.mensagem, icon: 'error', confirmButtonColor: '#d33' });
+            }
+        });
+    </script>
+</body>
+</html>
