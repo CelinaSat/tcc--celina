@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.dashboard-page {
+    background: url('/static/trabalho.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar Superior estilo SENAI */
+.navbar-senai {
+    background-color: #0f2b66;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-senai .logo-container img {
+    height: 38px;
+    width: auto;
+}
+
+.navbar-senai .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.navbar-senai .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navbar-senai .nav-links a:hover {
+    color: #ff6600;
+}
+
+.navbar-senai .nav-links a.btn-adm {
+    color: #ff6600;
+    font-weight: 700;
+}
+
+.navbar-senai .nav-links a.btn-sair {
+    color: #ff4d4d;
+}
+
+/* Container de Conteúdo Central */
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.welcome-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 550px;
+    width: 100%;
+}
+
+.welcome-card h1 {
+    color: #0f2b66;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.welcome-card p {
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-action {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary-senai {
+    background-color: #0f2b66;
+    color: #ffffff;
+}
+
+.btn-secondary-senai {
+    background-color: #ff6600;
+    color: #ffffff;
+}

@@ -1,0 +1,4 @@
+pip install flask flask-bcrypt mysql-connector-python
+
+python -c "import bcrypt; print(bcrypt.hashpw(b'admin123', bcrypt.gensalt()).decode('utf-8'))"
+

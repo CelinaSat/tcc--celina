@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/styleee.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-area">
+                <img src="/static/senainovo.jpg" alt="Logo SENAI">
+            </div>
+            <h2>Sistema</h2>
+            <p>Faça login para acessar o almoxarifado</p>
+
+            <form id="formLogin">
+                <div class="form-group">
+                    <label for="usuario">Usuário:</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const res = await fetch('/fazer_login', {
+                method: 'POST',
+                body: new FormData(this)
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.status === 'sucesso') {
+                window.location.href = data.redirect;
+            } else {
+                Swal.fire({
+                    title: 'Falha no Login',
+                    text: data.mensagem,
+                    icon: 'error',
+                    confirmButtonColor: '#ff6600',
+                    confirmButtonText: 'Tentar novamente'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

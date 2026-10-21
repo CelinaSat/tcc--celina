@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel</title>
+    <link rel="stylesheet" href="static/stylee.css">
+</head>
+<body class="dashboard-page">
+
+    <!-- Navbar SENAI com opção ADM -->
+    <nav class="navbar-senai">
+        <div class="logo-container">
+            <img src="static/senainovo.jpg" alt="Logo SENAI">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/adm">Início</a></li>
+            <li><a href="/almoxarifado">Almoxarifado</a></li>
+            <li><a href="/add">Adicionar item</a></li>
+            <li><a href="/retirada">Retirada</a></li>
+            
+            {% if session.get('permissao') == 'admin' %}
+                <li><a href="/adicio" class="btn-adm">Cadastrar Usuário</a></li>
+            {% endif %}
+
+            <li><a href="/logout" class="btn-sair">Sair</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Central -->
+    <div class="main-container">
+        <div class="welcome-card">
+            <h1>
+                {% if session.get('permissao') == 'admin' %}
+                    Painel do Administrador
+                {% else %}
+                    Painel do Usuário
+                {% endif %}
+            </h1>
+            
+            <p>
+                {% if session.get('permissao') == 'admin' %}
+                    Você tem permissões de acesso total. Gerencie os itens do estoque ou cadastre novos usuários no sistema.
+                {% else %}
+                    Bem-vindo ao sistema de controle de estoque do almoxarifado.
+                {% endif %}
+            </p>
+            
+            <div class="action-buttons">
+                <a href="/almoxarifado" class="btn-action btn-primary-senai">Ver Estoque</a>
+                
+                {% if session.get('permissao') == 'admin' %}
+                    <a href="/adicio" class="btn-action btn-secondary-senai">Cadastrar Usuário</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
